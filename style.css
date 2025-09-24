@@ -1,120 +1,164 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: #1a1a1a; /* Cinza escuro para o fundo */
-    color: #f5f5f5; /* Cinza claro para o texto */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    /* Padrão para o fundo, como na imagem */
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 20px 20px;
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desbloqueie o Sucesso</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            /* Configuração para rolagem vertical */
+            overflow-x: hidden; /* Esconde a rolagem horizontal */
+            overflow-y: scroll; /* Permite a rolagem vertical */
+            display: block; /* Volta para o comportamento padrão de blocos */
+            scroll-snap-type: y mandatory; /* Para "prender" a rolagem em cada slide */
+            scrollbar-width: none; /* Esconde a barra de rolagem no Firefox */
+            -ms-overflow-style: none; /* Esconde a barra de rolagem no IE e Edge */
+        }
 
-.container {
-    background-color: rgba(34, 34, 34, 0.9); /* Um cinza ainda mais escuro com transparência */
-    padding: 40px;
-    border-radius: 15px; /* Bordas mais arredondadas */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Sombra para o efeito de flutuar */
-    max-width: 600px;
-    width: 90%;
-    backdrop-filter: blur(5px); /* Efeito de desfoque sutil, moderno */
-}
+        body::-webkit-scrollbar {
+            display: none; /* Esconde a barra de rolagem no Chrome e Safari */
+        }
 
-h1 {
-    color: #fff; /* Branco puro para os títulos */
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
+        .slide {
+            min-height: 100vh; /* Cada slide ocupa a altura total da tela */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start; /* O ponto de ancoragem para a rolagem */
+        }
 
-p {
-    color: #aaa; /* Cinza claro para o texto normal */
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
+        .container {
+            background-color: rgba(34, 34, 34, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(5px);
+            white-space: normal;
+            margin: 20px;
+        }
 
-.password-box {
-    margin-top: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap; /* Permite quebrar a linha em telas menores */
-}
+        .password-box {
+            position: relative;
+        }
 
-#password {
-    padding: 15px;
-    border: 1px solid #444; /* Borda mais discreta */
-    background-color: #2c2c2c;
-    color: #fff;
-    border-radius: 8px;
-    font-size: 1rem;
-    width: 250px;
-    transition: border-color 0.3s;
-}
+        #password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #aaa;
+            transition: color 0.3s;
+        }
 
-#password:focus {
-    outline: none;
-    border-color: #ffc107; /* Borda amarela ao focar */
-}
+        #password-toggle:hover {
+            color: #ffc107;
+        }
 
-button {
-    padding: 15px 30px;
-    background-color: #ffc107; /* Amarelo de destaque */
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background-color 0.3s, transform 0.2s;
-    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
-}
+        .content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide" id="password-slide">
+        <div class="container" id="password-container">
+            <h1>Um Guia Para o Seu Futuro.</h1>
+            <p>Acesse o nosso guia de negócios. <br> Digite a senha para continuar:</p>
+            <div class="password-box">
+                <input type="password" id="password" placeholder="Digite a senha aqui">
+                <button id="password-toggle" onclick="togglePassword()">👁️</button>
+                <button onclick="checkPassword()">Acessar</button>
+            </div>
+            <p id="message"></p>
+        </div>
+    </div>
 
-button:hover {
-    background-color: #e0a800; /* Amarelo mais escuro no hover */
-    transform: translateY(-2px); /* Pequeno movimento para cima */
-}
+    <div class="content">
+        <div class="slide">
+            <div class="container">
+                <h1>O Seu Guia Para o Sucesso!</h1>
+                <p>Criar um negócio de sucesso exige dedicação, pesquisa e planejamento. Siga estes passos para construir seu futuro de forma sólida e sustentável.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="container">
+                <h3>Passo 1: Encontre a Sua Ideia</h3>
+                <p>Identifique um problema que você pode resolver. Sua paixão pode ser o ponto de partida do seu negócio.</p>
+                <ul>
+                    <li>**Pesquisa de mercado:** Verifique se há demanda.</li>
+                    <li>**Diferencial:** O que fará seu produto se destacar?</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="container">
+                <h3>Passo 2: Monte um Plano de Negócios</h3>
+                <p>Um plano é o mapa para o sucesso. Ele ajuda a organizar suas ideias e a definir metas claras.</p>
+                <ul>
+                    <li>**Público-alvo:** Quem são seus clientes?</li>
+                    <li>**Orçamento:** Quanto dinheiro você precisa?</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="container">
+                <h3>Passo 3: Legalização e Estrutura</h3>
+                <p>Formalize seu negócio para operar com segurança e profissionalismo.</p>
+                <ul>
+                    <li>**Tipos de empresa:** Pesquise sobre MEI.</li>
+                    <li>**Registros:** Entenda quais licenças são necessárias.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="container">
+                <h3>Passo 4: Comece Pequeno e Cresça</h3>
+                <p>Lance seu produto em uma escala menor, colete feedback e faça melhorias constantes.</p>
+                <ul>
+                    <li>**Redes sociais:** Use-as para se conectar com clientes.</li>
+                    <li>**Peça feedback:** Aprenda com a opinião dos primeiros clientes.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-#message {
-    margin-top: 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #ff6b6b; /* Cor de erro diferente */
-}
+    <script>
+        function checkPassword() {
+            const correctPassword = "familialegal.ofc";
+            const inputPassword = document.getElementById("password").value;
+            const passwordSlide = document.getElementById("password-slide");
+            const mainContent = document.querySelector(".content");
+            const messageElement = document.getElementById("message");
 
-.content {
-    text-align: left;
-    padding: 20px;
-    display: none;
-}
+            if (inputPassword === correctPassword) {
+                passwordSlide.style.display = "none";
+                mainContent.style.display = "block";
+                window.scrollTo(0, 0);
+            } else {
+                messageElement.textContent = "Senha incorreta. Tente novamente.";
+                messageElement.style.color = "#ff6b6b";
+            }
+        }
 
-.content h2 {
-    color: #fff;
-    border-bottom: 2px solid #ffc107;
-    padding-bottom: 8px;
-    margin-top: 30px;
-}
+        function togglePassword() {
+            const passwordInput = document.getElementById("password");
+            const passwordToggle = document.getElementById("password-toggle");
 
-.content ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.content ul li {
-    background-color: rgba(44, 44, 44, 0.8);
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s;
-}
-
-.content ul li:hover {
-    transform: translateY(-3px); /* Efeito de "levitar" no hover */
-}
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordToggle.textContent = "🙈";
+            } else {
+                passwordInput.type = "password";
+                passwordToggle.textContent = "👁️";
+            }
+        }
+    </script>
+</body>
+</html>

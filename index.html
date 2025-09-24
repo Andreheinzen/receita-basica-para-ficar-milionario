@@ -6,45 +6,39 @@
     <title>Desbloqueie o Sucesso</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .content {
-            text-align: left;
-            padding: 20px;
-            display: none; /* Mantém oculto no início */
+        body {
+            /* Configuração para rolagem horizontal */
+            overflow-x: scroll; /* Permite a rolagem horizontal */
+            overflow-y: hidden; /* Esconde a rolagem vertical */
+            white-space: nowrap; /* Impede que os itens quebrem a linha */
+            display: flex; /* Para alinhar os itens horizontalmente */
+            scroll-snap-type: x mandatory; /* Para "prender" a rolagem em cada slide */
+            scrollbar-width: none; /* Esconde a barra de rolagem no Firefox */
+            -ms-overflow-style: none; /* Esconde a barra de rolagem no IE e Edge */
         }
 
-        .content h2 {
-            color: #fff;
-            border-bottom: 2px solid #ffc107;
-            padding-bottom: 8px;
-            margin-top: 30px;
-            text-align: center;
+        body::-webkit-scrollbar {
+            display: none; /* Esconde a barra de rolagem no Chrome e Safari */
         }
 
-        .tips-grid {
-            display: flex; /* Habilita o Flexbox */
-            flex-wrap: wrap; /* Permite quebrar a linha em telas menores */
-            gap: 20px; /* Espaço entre os cartões */
-            justify-content: center; /* Centraliza os cartões */
+        .slide {
+            min-width: 100vw; /* Cada slide ocupa a largura total da tela */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start; /* O ponto de ancoragem para a rolagem */
         }
 
-        .tip-card {
-            background-color: #2c2c2c;
-            color: #f5f5f5;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s;
-            flex: 1 1 300px; /* Garante que os cartões fiquem na horizontal e se ajustem */
-            min-width: 250px;
-        }
-
-        .tip-card h3 {
-            color: #ffc107;
-            margin-top: 0;
-        }
-
-        .tip-card:hover {
-            transform: translateY(-5px);
+        .container {
+            background-color: rgba(34, 34, 34, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(5px);
+            white-space: normal; /* Permite que o texto quebre a linha dentro do container */
+            margin: 20px;
         }
 
         .password-box {
@@ -58,31 +52,44 @@
             transform: translateY(-50%);
             background: none;
             border: none;
-            color: #aaa;
             cursor: pointer;
-            font-size: 0.9em;
-            text-decoration: underline;
+            font-size: 1.2em;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+
+        #password-toggle:hover {
+            color: #ffc107; /* Muda a cor do ícone no hover */
+        }
+
+        .content {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="password-container">
-        <h1>Um Guia Para o Seu Futuro.</h1>
-        <p>Acesse o nosso guia de negócios. <br> Digite a senha para continuar:</p>
-        <div class="password-box">
-            <input type="password" id="password" placeholder="Digite a senha aqui">
-            <button id="password-toggle" onclick="togglePassword()">Mostrar</button>
-            <button onclick="checkPassword()">Acessar</button>
+    <div class="slide" id="password-slide">
+        <div class="container" id="password-container">
+            <h1>Um Guia Para o Seu Futuro.</h1>
+            <p>Acesse o nosso guia de negócios. <br> Digite a senha para continuar:</p>
+            <div class="password-box">
+                <input type="password" id="password" placeholder="Digite a senha aqui">
+                <button id="password-toggle" onclick="togglePassword()">👁️</button>
+                <button onclick="checkPassword()">Acessar</button>
+            </div>
+            <p id="message"></p>
         </div>
-        <p id="message"></p>
     </div>
 
-    <div class="container content" id="main-content">
-        <h1>O Seu Guia Para o Sucesso!</h1>
-        <p>Criar um negócio de sucesso exige dedicação, pesquisa e planejamento. Siga estes passos para construir seu futuro de forma sólida e sustentável.</p>
-
-        <div class="tips-grid">
-            <div class="tip-card">
+    <div class="content">
+        <div class="slide">
+            <div class="container">
+                <h1>O Seu Guia Para o Sucesso!</h1>
+                <p>Criar um negócio de sucesso exige dedicação, pesquisa e planejamento. Siga estes passos para construir seu futuro de forma sólida e sustentável.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="container">
                 <h3>Passo 1: Encontre a Sua Ideia</h3>
                 <p>Identifique um problema que você pode resolver. Sua paixão pode ser o ponto de partida do seu negócio.</p>
                 <ul>
@@ -90,7 +97,9 @@
                     <li>**Diferencial:** O que fará seu produto se destacar?</li>
                 </ul>
             </div>
-            <div class="tip-card">
+        </div>
+        <div class="slide">
+            <div class="container">
                 <h3>Passo 2: Monte um Plano de Negócios</h3>
                 <p>Um plano é o mapa para o sucesso. Ele ajuda a organizar suas ideias e a definir metas claras.</p>
                 <ul>
@@ -98,7 +107,9 @@
                     <li>**Orçamento:** Quanto dinheiro você precisa?</li>
                 </ul>
             </div>
-            <div class="tip-card">
+        </div>
+        <div class="slide">
+            <div class="container">
                 <h3>Passo 3: Legalização e Estrutura</h3>
                 <p>Formalize seu negócio para operar com segurança e profissionalismo.</p>
                 <ul>
@@ -106,7 +117,9 @@
                     <li>**Registros:** Entenda quais licenças são necessárias.</li>
                 </ul>
             </div>
-            <div class="tip-card">
+        </div>
+        <div class="slide">
+            <div class="container">
                 <h3>Passo 4: Comece Pequeno e Cresça</h3>
                 <p>Lance seu produto em uma escala menor, colete feedback e faça melhorias constantes.</p>
                 <ul>
@@ -121,13 +134,15 @@
         function checkPassword() {
             const correctPassword = "familialegal.ofc";
             const inputPassword = document.getElementById("password").value;
-            const passwordContainer = document.getElementById("password-container");
-            const mainContent = document.getElementById("main-content");
+            const passwordSlide = document.getElementById("password-slide");
+            const mainContent = document.querySelector(".content");
             const messageElement = document.getElementById("message");
 
             if (inputPassword === correctPassword) {
-                passwordContainer.style.display = "none";
-                mainContent.style.display = "block";
+                passwordSlide.style.display = "none";
+                mainContent.style.display = "flex";
+                // Rola para a primeira "tela" do conteúdo
+                mainContent.scrollLeft = 0;
             } else {
                 messageElement.textContent = "Senha incorreta. Tente novamente.";
                 messageElement.style.color = "#ff6b6b";
@@ -140,10 +155,10 @@
 
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
-                passwordToggle.textContent = "Esconder";
+                passwordToggle.textContent = "🙈"; // Emoji de olho tapado
             } else {
                 passwordInput.type = "password";
-                passwordToggle.textContent = "Mostrar";
+                passwordToggle.textContent = "👁️"; // Emoji de olho aberto
             }
         }
     </script>

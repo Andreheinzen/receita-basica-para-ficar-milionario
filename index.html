@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desbloqueie o Sucesso</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Um Guia Para o Seu Futuro.</h1>
+        <p>Acesse o nosso guia de negócios. <br> Digite a senha para continuar:</p>
+        <div class="password-box">
+            <input type="password" id="password" placeholder="Digite a senha aqui">
+            <button onclick="checkPassword()">Acessar</button>
+        </div>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const correctPassword = "familialegal.ofc";
+            const inputPassword = document.getElementById("password").value;
+            const messageElement = document.getElementById("message");
+
+            if (inputPassword === correctPassword) {
+                window.location.href = "receita.html";
+            } else {
+                messageElement.textContent = "Senha incorreta. Tente novamente.";
+                messageElement.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
